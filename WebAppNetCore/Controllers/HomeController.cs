@@ -9,7 +9,7 @@ namespace WebAppNetCore.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository repository;
+        private readonly IRepository repository;
 
         public HomeController(IRepository tmpRepo) => repository = tmpRepo;
 
@@ -19,6 +19,18 @@ namespace WebAppNetCore.Controllers
         public IActionResult AddProduct(Product product)
         {
             repository.AddProduct(product);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult UpdateProduct(long key)
+        {
+            return View(repository.GetProduct(key));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProduct(Product product)
+        {
+            repository.UpdateProduct(product);
             return RedirectToAction(nameof(Index));
         }
     }

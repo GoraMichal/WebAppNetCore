@@ -6,8 +6,12 @@ namespace WebAppNetCore.Models
     public interface IRepository
     {
         IEnumerable<Product> Products { get; }
+
+        //Metoda zapewniajaca pojedynczy obiekt za pomoca klucza glownego
         Product GetProduct(long key);
         void AddProduct(Product product);
+        
+        //Metoda otrzymuje obiekt Product i nie zwrawca wyniku
         void UpdateProduct(Product product);
     }
 }

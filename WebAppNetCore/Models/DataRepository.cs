@@ -22,7 +22,16 @@ namespace WebAppNetCore.Models
 
         public void UpdateProduct(Product product)
         {
-            context.Products.Update(product);
+            //Aktualizuje wszystkie dane
+            //context.Products.Update(product);
+
+            //Aktualizuje zmienione rekordy
+            Product p = GetProduct(product.Id);
+            p.Name = product.Name;
+            p.Category = product.Category;
+            p.PurchasePrice = product.PurchasePrice;
+            p.RetailPrice = product.RetailPrice;
+
             context.SaveChanges();
         }
     }

@@ -1,47 +1,42 @@
 ﻿@model IEnumerable<Product>
 
-@{
-    Layout = null;
-}
+<h3 class="p-2 bg-primary text-center">Produkty</h3>
 
-<h3>Products</h3>
-
-<div>
-    <div>
-        <div class="">Nazwa</div>
-        <div>Kategoria</div>
-        <div>Cena kupna</div>
-        <div>Cena sprzedaży</div>
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col font-weight-bold">Nazwa</div>
+        <div class="col font-weight-bold">Kategoria</div>
+        <div class="col font-weight-bold">Cena kupna</div>
+        <div class="col font-weight-bold">Cena sprzedaży</div>
+        <div class="col"></div>
     </div>
 
     <form asp-action="AddProduct" method="post">
-        <div>
-            <div><input name="Name" /></div>
-            <div><input name="Category" /></div>
-            <div><input name="PurchasePrice" /></div>
-            <div><input name="RetailPrice" /></div>
-        </div>
-
-        <div>
-            <button type="submit" class="">Add</button>
+        <div class="row">
+            <div class="col"><input name="Name" class="form-control"/></div>
+            <div class="col"><input name="Category" class="form-control" /></div>
+            <div class="col"><input name="PurchasePrice" class="form-control" /></div>
+            <div class="col"><input name="RetailPrice" class="form-control" /></div>
+            <div class="col"><button type="submit" class="btn btn-primary">Add</button></div>
         </div>
     </form>
 
     @if (Model.Count() == 0)
     {
-        <div>
-            <div>Brak danych</div>
+        <div class="row">
+            <div class="col">Brak danych</div>
         </div>
     }
     else
     {
         @foreach(Product prod in Model)
         {
-            <div>
-                <div>@prod.Name</div>
-                <div>@prod.Category</div>
-                <div>@prod.PurchasePrice</div>
-                <div>@prod.RetailPrice</div>
+            <div class="row">
+                <div class="col">@prod.Name</div>
+                <div class="col">@prod.Category</div>
+                <div class="col">@prod.PurchasePrice</div>
+                <div class="col">@prod.RetailPrice</div>
+                <div class="col"></div>
             </div>
         }
     }

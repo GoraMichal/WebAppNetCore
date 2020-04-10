@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebAppNetCore.Models;
 
 namespace WebAppNetCore.Controllers
@@ -40,9 +36,17 @@ namespace WebAppNetCore.Controllers
             return View(nameof(Index), repository.Products);
         }
 
+        [HttpPost]
         public IActionResult UpdateAll(Product[] products)
         {
             repository.UpdateAll(products);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Product product)
+        {
+            repository.Delete(product);
             return RedirectToAction(nameof(Index));
         }
     }

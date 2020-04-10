@@ -14,7 +14,9 @@ namespace WebAppNetCore.Models
         //Metoda otrzymuje obiekt Product i nie zwrawca wyniku
         void UpdateProduct(Product product);
 
-        //Aktualizacja zbiorcza
+        //Aktualizacja zbiorcza (Bulk Updates)
         void UpdateAll(Product[] products);
+
+        void Delete(Product product);
     }
 }

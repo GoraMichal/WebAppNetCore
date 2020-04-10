@@ -43,8 +43,15 @@
                     <div class="col">@prod.PurchasePrice</div>
                     <div class="col">@prod.RetailPrice</div>
                     <div class="col">
-                        <a asp-action="UpdateProduct" asp-route-key="@prod.Id"
-                           class="btn btn-outline-primary">Edytuj</a>
+                        <form asp-action="Delete" method="post">
+                            <a asp-action="UpdateProduct" asp-route-key="@prod.Id"
+                               class="btn btn-outline-primary">Edytuj</a>
+
+                            <input type="hidden" name="Id" value="@prod.Id" />
+                            <button type="submit" class="btn btn-outline-danger">
+                                Usuń
+                            </button>
+                        </form>
                     </div>
                 </div>
             }
@@ -57,6 +64,5 @@
     else
     {
         @Html.Partial("InlineEditor", Model)
-
     }
 </div>

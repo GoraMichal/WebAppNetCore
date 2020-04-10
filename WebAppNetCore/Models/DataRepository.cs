@@ -35,10 +35,16 @@ namespace WebAppNetCore.Models
             context.SaveChanges();
         }
 
-        public void UpdateAll(Product[] product)
+        public void UpdateAll(Product[] products)
         {
-            //Wiele obiektow gotowych do aktualizacji
-            context.Products.UpdateRange(product);
+            //Wiele obiektow do aktualizacji (Bulk Updates)
+            context.Products.UpdateRange(products);
+            context.SaveChanges();
+        }
+
+        public void Delete(Product product)
+        {
+            context.Products.Remove(product);
             context.SaveChanges();
         }
     }

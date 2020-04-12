@@ -11,5 +11,7 @@ namespace WebAppNetCore.Models
         public DataContext(DbContextOptions<DataContext> obj) : base(obj) { }
         
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }

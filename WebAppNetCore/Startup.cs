@@ -31,6 +31,7 @@ namespace WebAppNetCore
             //AddTransient - instancje s¹ tworzone przy ka¿dym ¿¹daniu
             //services.AddSingleton<IRepository, DataRepository>();
             services.AddTransient<IRepository, DataRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
         }

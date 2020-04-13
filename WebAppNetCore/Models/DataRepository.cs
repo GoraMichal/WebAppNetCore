@@ -26,12 +26,15 @@ namespace WebAppNetCore.Models
             //Aktualizuje wszystkie rekordy
             //context.Products.Update(product);
 
-            Product p = GetProduct(product.Id);
+            //Product p = GetProduct(product.Id);
+            Product p = context.Products.Find(product.Id);
+
             p.Name = product.Name;
-            p.Category = product.Category;
+            //p.Category = product.Category;
+            p.CategoryId = product.CategoryId;
             p.PurchasePrice = product.PurchasePrice;
             p.RetailPrice = product.RetailPrice;
-
+          
             context.SaveChanges();
         }
 

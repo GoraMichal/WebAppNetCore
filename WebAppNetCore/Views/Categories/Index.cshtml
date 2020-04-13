@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Category>
+
+<h3 class="p-2 bg-primary text-white text-center">Kategorie</h3>
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-1 font-weight-bold">Id</div>
+        <div class="col font-weight-bold">Nazwa</div>
+        <div class="col font-weight-bold">Opis</div>
+        <div class="col-3"></div>
+    </div>
+    @if (ViewBag.EditId == null)
+    {
+        <form asp-action="AddCategory" method="post">
+            @Html.Partial("CategoryEditor", new Category())
+        </form>
+    }
+
+    @foreach (Category cat in Model)
+    {
+        if (cat.Id == ViewBag.EditId)
+        {
+            <form asp-action="UpdateCategory" method="post">
+                <input type="hidden" name="Id" value="@cat.Id" />
+                @Html.Partial("CategoryEditor", cat)
+            </form>
+        }
+        else
+        {
+            <div class="row p-2">
+                <div class="col-1">@cat.Id</div>
+                <div class="col">@cat.Name</div>
+                <div class="col">@cat.Description</div>
+                <div class="col-3">
+                    <form asp-action="DeleteCategory" method="post">
+                        <input type="hidden" name="Id" value="@cat.Id" />
+                        
+                        <a asp-action="EditCategory" asp-route-id="@cat.Id"
+                           class="btn btn-outline-primary">Edytuj</a>
+
+                        <button type="submit" class="btn btn-outline-danger">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>

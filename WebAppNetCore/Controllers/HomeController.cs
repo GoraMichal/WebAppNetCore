@@ -45,6 +45,7 @@ namespace WebAppNetCore.Controllers
 
         public IActionResult UpdateAll()
         {
+            ViewBag.Categories = categoryRepository.Categories;
             ViewBag.UpdateAll = true;
             return View(nameof(Index), repository.Products);
         }

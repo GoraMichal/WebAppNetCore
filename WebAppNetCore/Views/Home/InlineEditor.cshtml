@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Product>
+﻿@using WebAppNetCore.Models;
+@model IEnumerable<Product>
 
 <div class="row">
     <div class="col-1 font-weight-bold">Id</div>
@@ -13,28 +14,28 @@
 <form asp-action="UpdateAll" method="post">
     @foreach (Product p in Model)
     {
-        <div class="row p-2">
-            <div class="col-1">
-                @p.Id
-                <input type="hidden" name="Products[@i].Id" value="@p.Id" />
-            </div>
-            <div class="col">
-                <input class="form-control" name="Products[@i].Name"
-                       value="@p.Name" />
-            </div>
-            <div class="col">
-                <input class="form-control" name="Products[@i].Category"
-                       value="@p.Category" />
-            </div>
-            <div class="col text-right">
-                <input class="form-control" name="Products[@i].PurchasePrice"
-                       value="@p.PurchasePrice" />
-            </div>
-            <div class="col text-right">
-                <input class="form-control" name="Products[@i].RetailPrice"
-                       value="@p.RetailPrice" />
-            </div>
+    <div class="row p-2">
+        <div class="col-1">
+            @p.Id
+            <input type="hidden" name="Products[@i].Id" value="@p.Id" />
         </div>
+        <div class="col">
+            <input class="form-control" name="Products[@i].Name"
+                   value="@p.Name" />
+        </div>
+        <div class="col">
+            <input class="form-control" name="Products[@i].Category"
+                   value="@p.Category.Name" />
+        </div>
+        <div class="col text-right">
+            <input class="form-control" name="Products[@i].PurchasePrice"
+                   value="@p.PurchasePrice" />
+        </div>
+        <div class="col text-right">
+            <input class="form-control" name="Products[@i].RetailPrice"
+                   value="@p.RetailPrice" />
+        </div>
+    </div>
         i++;
     }
     <div class="text-center m-2">

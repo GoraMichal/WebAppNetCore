@@ -38,10 +38,10 @@ namespace WebAppNetCore.Models
 
             p.Name = product.Name;
             //p.Category = product.Category;
+            p.CategoryId = product.CategoryId;
             p.PurchasePrice = product.PurchasePrice;
             p.RetailPrice = product.RetailPrice;
-            p.CategoryId = product.CategoryId;
-
+           
             context.SaveChanges();
         }
 
@@ -57,9 +57,11 @@ namespace WebAppNetCore.Models
 
             foreach (Product dbProduct in dataKeys)
             {
-                Product reqProduct = data[dbProduct.Id];
+                //Product reqProduct = data[dbProduct.Id];
+                Product reqProduct = context.Products.Find(dbProduct.Id);
+
                 dbProduct.Name = reqProduct.Name;
-                dbProduct.Category = reqProduct.Category;
+                dbProduct.CategoryId = reqProduct.CategoryId;
                 dbProduct.PurchasePrice = reqProduct.PurchasePrice;
                 dbProduct.RetailPrice = reqProduct.RetailPrice;
             }

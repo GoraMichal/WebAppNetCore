@@ -5,9 +5,14 @@ namespace WebAppNetCore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository repository;
+        private IRepository repository;
+        private ICategoryRepository categoryRepository;
 
-        public HomeController(IRepository tmpRepo) => repository = tmpRepo;
+        public HomeController(IRepository tempRepo, ICategoryRepository tempCatRepo) 
+        {
+            repository = tempRepo;
+            categoryRepository = tempCatRepo;
+        }
 
         public IActionResult Index() => View(repository.Products);
 
@@ -20,6 +25,7 @@ namespace WebAppNetCore.Controllers
 
         public IActionResult UpdateProduct(long key)
         {
+            ViewBag.Categories = categoryRepository.Categories;
             return View(key == 0 ? new Product() : repository.GetProduct(key));
         }
 

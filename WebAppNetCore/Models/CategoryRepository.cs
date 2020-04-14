@@ -5,17 +5,11 @@ using System.Threading.Tasks;
 
 namespace WebAppNetCore.Models
 {
-    public interface ICategoryRepository
-    {
-        IEnumerable<Category> Categories { get; }
-        void AddCategory(Category category);
-        void UpdateCategory(Category category);
-        void DeleteCategory(Category category);
-    }
+
 
     public class CategoryRepository : ICategoryRepository
     {
-        private DataContext context;
+        private readonly DataContext context;
 
         public CategoryRepository(DataContext ctx) => context = ctx;
 

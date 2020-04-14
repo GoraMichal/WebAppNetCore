@@ -23,10 +23,20 @@
             <input class="form-control" name="Products[@i].Name"
                    value="@p.Name" />
         </div>
+
         <div class="col">
-            <input class="form-control" name="Products[@i].Category"
-                   value="@p.Category.Name" />
+            <select class="form-control" name="Products[@i].CategoryId">
+    
+                @foreach (Category cat in ViewBag.Categories)
+                {
+                    <option selected=@(@p.Category.Id == cat.Id) value="@cat.Id">
+                        @cat.Name
+                    </option>
+                }
+            </select>
         </div>
+
+
         <div class="col text-right">
             <input class="form-control" name="Products[@i].PurchasePrice"
                    value="@p.PurchasePrice" />

@@ -27,7 +27,7 @@ namespace WebAppNetCore.Models
             context.SaveChanges();
         }
 
-        //Aktualizuje jeden obiekt (zmienione rekordy)
+        //Aktualizuje jeden obiekt 
         public void UpdateProduct(Product product)
         {
             //Aktualizuje wszystkie rekordy
@@ -37,7 +37,6 @@ namespace WebAppNetCore.Models
             Product p = context.Products.Find(product.Id);
 
             p.Name = product.Name;
-            //p.Category = product.Category;
             p.CategoryId = product.CategoryId;
             p.PurchasePrice = product.PurchasePrice;
             p.RetailPrice = product.RetailPrice;
@@ -45,7 +44,7 @@ namespace WebAppNetCore.Models
             context.SaveChanges();
         }
 
-        //Aktualizuje wiele obiektow tzw. Bulk Updates (zmienione rekordy)
+        //Aktualizuje wiele obiektow tzw. Bulk Updates
         public void UpdateAll(Product[] products)
         {
             //context.Products.UpdateRange(products);
@@ -57,8 +56,7 @@ namespace WebAppNetCore.Models
 
             foreach (Product dbProduct in dataKeys)
             {
-                //Product reqProduct = data[dbProduct.Id];
-                Product reqProduct = context.Products.Find(dbProduct.Id);
+                Product reqProduct = data[dbProduct.Id];
 
                 dbProduct.Name = reqProduct.Name;
                 dbProduct.CategoryId = reqProduct.CategoryId;

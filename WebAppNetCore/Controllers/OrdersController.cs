@@ -45,6 +45,16 @@ namespace WebAppNetCore.Controllers
         [HttpPost]
         public IActionResult AddOrUpdateOrder(Order order)
         {
+            order.Lines = order.Lines.Where(l => l.Id > 0 || (l.Id == 0 && l.Quantity > 0)).ToArray();
+
+            if(order.Id == 0)
+            {
+                ordersRepository.AddOrder(order);
+            }
+            else
+            {
+                ordersRepository.UpdateOrder(order);
+            }
             return RedirectToAction(nameof(Index));
         }
 

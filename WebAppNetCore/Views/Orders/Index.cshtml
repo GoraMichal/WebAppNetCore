@@ -14,7 +14,7 @@
     <div>
         <div class="row placeholder p-2">
             <div class="col-12 text-center">
-                <h5>No Orders</h5>
+                <h5>Brak zamówień</h5>
             </div>
         </div>
         @foreach (Order order in Model)
@@ -25,7 +25,7 @@
                 <div class="col">@order.ZipCode</div>
                 <div class="col">@order.Lines.Sum(l => l.Quantity * l.Product.RetailPrice)</div>
                 <div class="col">@order.Lines.Sum(l => l.Quantity * (l.Product.RetailPrice - l.Product.PurchasePrice))</div>
-                <div class="col-1">@(order.Shipped ? "Shipped" : "Pending")</div>
+                <div class="col-1">@(order.Shipped ? "Dostarczono" : "Realizacja")</div>
                 <div class="col-3 text-right">
                     <form asp-action="DeleteOrder" method="post">
                         <input type="hidden" name="Id" value="@order.Id" />

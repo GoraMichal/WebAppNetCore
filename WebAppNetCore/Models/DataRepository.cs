@@ -27,7 +27,7 @@ namespace WebAppNetCore.Models
             context.SaveChanges();
         }
 
-        //Aktualizuje jeden obiekt 
+        //Aktualizuje jeden obiekt
         public void UpdateProduct(Product product)
         {
             //Aktualizuje wszystkie rekordy
@@ -35,7 +35,6 @@ namespace WebAppNetCore.Models
 
             //Product p = GetProduct(product.Id);
             Product p = context.Products.Find(product.Id);
-
             p.Name = product.Name;
             p.CategoryId = product.CategoryId;
             p.PurchasePrice = product.PurchasePrice;
@@ -52,17 +51,26 @@ namespace WebAppNetCore.Models
 
             //Slownik dla obiektow Product z uzyciem kolekcji kluczy do zapytan odpowiednich obiektow w db
             Dictionary<long, Product> data = products.ToDictionary(p => p.Id);
-            IEnumerable<Product> dataKeys = context.Products.Where(p => data.Keys.Contains(p.Id));
+            IEnumerable<Product> baseLine = context.Products.Where(p => data.Keys.Contains(p.Id));
 
-            foreach (Product dbProduct in dataKeys)
+            foreach (Product dbProduct in baseLine)
             {
                 Product reqProduct = data[dbProduct.Id];
-
                 dbProduct.Name = reqProduct.Name;
                 dbProduct.CategoryId = reqProduct.CategoryId;
                 dbProduct.PurchasePrice = reqProduct.PurchasePrice;
                 dbProduct.RetailPrice = reqProduct.RetailPrice;
             }
+
+            //foreach (Product dbProduct in products)
+            //{
+            //    Product reqProduct = context.Products.Find(dbProduct.Id);
+            //    reqProduct.Name = dbProduct.Name;
+            //    reqProduct.CategoryId = dbProduct.CategoryId;
+            //    reqProduct.PurchasePrice = dbProduct.PurchasePrice;
+            //    reqProduct.RetailPrice = dbProduct.RetailPrice;
+            //}
+
             context.SaveChanges();
         }
 

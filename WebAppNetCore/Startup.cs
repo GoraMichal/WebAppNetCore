@@ -32,6 +32,8 @@ namespace WebAppNetCore
             //services.AddSingleton<IRepository, DataRepository>();
             services.AddTransient<IRepository, DataRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IOrdersRepository, OrdersRepository>();
+
             var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
         }

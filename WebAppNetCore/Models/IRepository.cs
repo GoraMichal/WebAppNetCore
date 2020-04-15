@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebAppNetCore.Models.Pages;
 
 namespace WebAppNetCore.Models
 {
@@ -6,6 +7,8 @@ namespace WebAppNetCore.Models
     public interface IRepository
     {
         IEnumerable<Product> Products { get; }
+
+        PagedList<Product> GetProducts(QueryOptions option);
 
         //Metoda zapewniajaca pojedynczy obiekt za pomoca klucza glownego
         Product GetProduct(long key);

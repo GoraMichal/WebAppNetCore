@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using WebAppNetCore.Models.Pages;
 
 namespace WebAppNetCore.Models
 {
@@ -20,6 +21,12 @@ namespace WebAppNetCore.Models
 
         //public IEnumerable<Product> Products => context.Products;
         //public Product GetProduct(long key) => context.Products.Find(key);
+
+        public PagedList<Product> GetProducts(QueryOptions options)
+        {
+            return new PagedList<Product>(context.Products
+                .Include(p => p.Category), options);
+        }
 
         public void AddProduct(Product product)
         {

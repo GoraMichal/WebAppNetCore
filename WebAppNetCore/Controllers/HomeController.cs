@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAppNetCore.Models;
+using WebAppNetCore.Models.Pages;
 
 namespace WebAppNetCore.Controllers
 {
@@ -14,7 +15,12 @@ namespace WebAppNetCore.Controllers
             categoryRepository = tempCatRepo;
         }
 
-        public IActionResult Index() => View(repository.Products);
+        //public IActionResult Index() => View(repository.Products);
+
+        public IActionResult Index(QueryOptions options)
+        {
+            return View(repository.GetProducts(options));
+        }
 
         [HttpPost]
         public IActionResult AddProduct(Product product)

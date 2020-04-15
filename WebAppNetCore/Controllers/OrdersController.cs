@@ -11,8 +11,8 @@ namespace WebAppNetCore.Controllers
 {
     public class OrdersController : Controller
     {
-        private IRepository productRepository;
-        private IOrdersRepository ordersRepository;
+        private readonly IRepository productRepository;
+        private readonly IOrdersRepository ordersRepository;
 
         public OrdersController(IRepository tempProductRepository, IOrdersRepository tempOrdersRepository)
         {

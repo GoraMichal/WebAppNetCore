@@ -9,8 +9,8 @@ using WebAppNetCore.Models;
 namespace WebAppNetCore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200414084957_Orders")]
-    partial class Orders
+    [Migration("20200429155345_indeksy")]
+    partial class indeksy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,12 +28,16 @@ namespace WebAppNetCore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Description");
+
+                    b.HasIndex("Name");
 
                     b.ToTable("Categories");
                 });
@@ -101,7 +105,7 @@ namespace WebAppNetCore.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("PurchasePrice")
                         .HasColumnType("decimal(18,2)");
@@ -112,6 +116,12 @@ namespace WebAppNetCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("Name");
+
+                    b.HasIndex("PurchasePrice");
+
+                    b.HasIndex("RetailPrice");
 
                     b.ToTable("Products");
                 });

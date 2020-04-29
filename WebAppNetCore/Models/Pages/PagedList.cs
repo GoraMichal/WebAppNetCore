@@ -40,12 +40,8 @@ namespace WebAppNetCore.Models.Pages
         public bool HasNextPage => CurrentPage < TotalPages;
         public QueryOptions Options { get; set; }
 
-        /*
-         * Parameter -  
-         * 
-         * 
-         */
 
+        //metoda do wyszukiwania z Linq.Expressions (dosyc zaawansowane)
         private static IQueryable<T> Order(IQueryable<T> query, string propertyName, bool desc)
         {
             var parameter = Expression.Parameter(typeof(T), "x");
@@ -61,6 +57,7 @@ namespace WebAppNetCore.Models.Pages
                 .Invoke(null, new object[] { query, lambda }) as IQueryable<T>;
         }
 
+        //metoda wyszukujaca
         private static IQueryable<T> Search(IQueryable<T> query, string propertyName, string searchTerm)
         {
             var parameter = Expression.Parameter(typeof(T), "x");

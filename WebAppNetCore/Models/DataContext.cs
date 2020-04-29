@@ -17,5 +17,15 @@ namespace WebAppNetCore.Models
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderLine> OrderLines { get; set; }
+
+        //wlasne indeksy (przyspieszają pracę bazy danych na serwerze, ale wydłużają czas aktualizacji)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>().HasIndex(p => p.Name);
+            modelBuilder.Entity<Product>().HasIndex(p => p.PurchasePrice);
+            modelBuilder.Entity<Product>().HasIndex(p => p.RetailPrice);
+            modelBuilder.Entity<Category>().HasIndex(p => p.Name);
+            modelBuilder.Entity<Category>().HasIndex(p => p.Description);
+        }
     }
 }

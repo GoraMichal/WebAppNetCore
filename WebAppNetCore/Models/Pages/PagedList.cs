@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -13,11 +12,8 @@ namespace WebAppNetCore.Models.Pages
         {
             CurrentPage = options.CurrentPage;
             PageSize = options.PageSize;
-            TotalPages = query.Count() / PageSize;
-            AddRange(query.Skip((CurrentPage - 1) * PageSize).Take(PageSize));
-
+          
             Options = options;
-
             if (options != null)
             {
                 //Sortowanie rosnoco / malejaco
@@ -26,13 +22,17 @@ namespace WebAppNetCore.Models.Pages
                     query = Order(query, options.OrderPropertyName, options.DescendingOrder);
                 }
 
-                    //Sprawdzanie czy nie puste i wyszukiwanie po nazwie lub kategorii
+                //Sprawdzanie czy nie puste i wyszukiwanie po nazwie lub kategorii
                 if (!string.IsNullOrEmpty(options.SearchPropertyName) && !string.IsNullOrEmpty(options.SearchTerm))
                 {
                     query = Search(query, options.SearchPropertyName, options.SearchTerm);
                 }
             }
+
+            TotalPages = query.Count() / PageSize;
+            AddRange(query.Skip((CurrentPage - 1) * PageSize).Take(PageSize));
         }
+
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
         public int TotalPages { get; set; }

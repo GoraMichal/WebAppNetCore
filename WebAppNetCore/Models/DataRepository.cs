@@ -10,7 +10,7 @@ namespace WebAppNetCore.Models
     {
         //private List<Product> data = new List<Product>();
 
-        private DataContext context;
+        private readonly DataContext context;
         public DataRepository(DataContext tempContext) => context = tempContext;
 
         public IEnumerable<Product> Products => context.Products
@@ -22,10 +22,16 @@ namespace WebAppNetCore.Models
         //public IEnumerable<Product> Products => context.Products;
         //public Product GetProduct(long key) => context.Products.Find(key);
 
-        public PagedList<Product> GetProducts(QueryOptions options)
+        public PagedList<Product> GetProducts(QueryOptions options, long category = 0)
         {
-            return new PagedList<Product>(context.Products
-                .Include(p => p.Category), options);
+            //sortowanie po stronie DB
+            IQueryable<Product> query = context.Products.Include(p => p.Category);
+            //jeżeli jest różne
+            if (category != 0)
+            {
+                query = query.Where(p => p.CategoryId == category);
+            }
+            return new PagedList<Product>(query, options);
         }
 
         public void AddProduct(Product product)

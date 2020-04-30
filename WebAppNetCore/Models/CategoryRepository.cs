@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using WebAppNetCore.Models;
+using WebAppNetCore.Models.Pages;
 
 namespace WebAppNetCore.Models
 {
-
 
     public class CategoryRepository : ICategoryRepository
     {
@@ -14,6 +12,11 @@ namespace WebAppNetCore.Models
         public CategoryRepository(DataContext ctx) => context = ctx;
 
         public IEnumerable<Category> Categories => context.Categories;
+
+        public PagedList<Category> GetCategories(QueryOptions options)
+        {
+            return new PagedList<Category>(context.Categories, options);
+        }
 
         public void AddCategory(Category category)
         {

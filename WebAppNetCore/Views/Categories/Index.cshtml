@@ -1,6 +1,16 @@
 ﻿@model IEnumerable<Category>
++		$exception	{"Invalid column name 'Description'."}	Microsoft.Data.SqlClient.SqlException
 
 <h3 class="p-2 bg-primary text-white text-center">Kategorie</h3>
+
+<div class="text-center">
+    @Html.Partial("Pages", Model)
+    @{
+        ViewBag.searches = new string[] { "Name", "Description" };
+        ViewBag.sorts = new string[] { "Name", "Description" };
+    }
+    @Html.Partial("PageOptions", Model)
+</div>
 
 <div class="container-fluid mt-3">
     <div class="row">
@@ -34,7 +44,7 @@
                 <div class="col-3">
                     <form asp-action="DeleteCategory" method="post">
                         <input type="hidden" name="Id" value="@cat.Id" />
-                        
+
                         <a asp-action="EditCategory" asp-route-id="@cat.Id"
                            class="btn btn-outline-primary">Edytuj</a>
 

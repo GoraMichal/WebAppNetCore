@@ -8,7 +8,8 @@ namespace WebAppNetCore.Models
     {
         IEnumerable<Product> Products { get; }
 
-        PagedList<Product> GetProducts(QueryOptions option);
+        //obiekty zapytania Product wedlug ich kategorii
+        PagedList<Product> GetProducts(QueryOptions option, long category = 0);
 
         //Metoda zapewniajaca pojedynczy obiekt za pomoca klucza glownego
         Product GetProduct(long key);

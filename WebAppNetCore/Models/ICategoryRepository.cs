@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using WebAppNetCore.Models.Pages;
 
 namespace WebAppNetCore.Models
 {
@@ -11,5 +9,6 @@ namespace WebAppNetCore.Models
         void AddCategory(Category category);
         void UpdateCategory(Category category);
         void DeleteCategory(Category category);
+        PagedList<Category> GetCategories(QueryOptions options);
     }
 }
